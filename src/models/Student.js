@@ -6,7 +6,7 @@ const StudentSchema = new mongoose.Schema(
       type: String,
       required: [true, "Name is required"],
     },
-    markUploadStatus: {
+    markUploadStatus:{
       type: Boolean,
       default: false,
     },
@@ -130,11 +130,12 @@ const StudentSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    certificate: {
-      type: String,
+    certificate:{
+      type:String
     },
+   
     Grade:{
-        type:String,
+      type:String,
     },
     redg_No: {
       type: String,

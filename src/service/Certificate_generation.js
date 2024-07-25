@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import Student from "../models/Student.js";
+import CertificateRepository from "../repository/CertificateRepository.js";
+
+const certificateRepo = new CertificateRepository();
 
 class CertificateService {
   async fetchStudentDetails(studentId) {
@@ -11,31 +14,51 @@ class CertificateService {
     }
   }
 
-  async generateCertificate(studentId,batchId,examId,courseName,courseCredit,courseLevel,trainingCenter,duration) {
+  async createCertificate(data) {
+    try {
+      const response = await certificateRepo.create(data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async generateCertificate(
+    studentId,
+    batchId,
+    examId,
+    courseName,
+    courseCredit,
+    courseLevel,
+    trainingCenter,
+    duration
+  ) {
     try {
       const student = await this.fetchStudentDetails(studentId);
       let payload = {};
-      if(student.absent === false){
-         payload = {
-            studentName:student.name,
-            stutentProfilePic:student.profilepic,
-            batchId:batchId,
-            fatherName:student.fathername,
-            DOB:student.dob,
-            Enrolment_number:student.redg_No,
-            qualification:courseName,
-            duration:duration,
-            credit:courseCredit,
-            level:courseLevel,
-            TrainingCenter:trainingCenter,
-            District:student.district,
-            state:student.state,
-            grade:student.Grade,
-            placeOfIssue:"Bhubaneswar",
-            DateOfIssue:new Date()
-        }
+      if (student.absent === false) {
+        payload = {
+          studentName: student.name,
+          stutentProfilePic: student.profilepic,
+          batchId: batchId,
+          fatherName: student.fathername,
+          DOB: student.dob,
+          Enrolment_number: student.redg_No,
+          qualification: courseName,
+          duration: duration,
+          credit: courseCredit,
+          level: courseLevel,
+          TrainingCenter: trainingCenter,
+          District: student.district,
+          state: student.state,
+          grade: student.Grade,
+          placeOfIssue: "Bhubaneswar",
+          DateOfIssue: new Date(),
+        };
+        const Certificate = await this.createCertificate(payload);
+        console.log(Certificate)
       }
-      console.log(payload)
+      
     } catch (error) {
       throw error;
     }
@@ -43,7 +66,3 @@ class CertificateService {
 }
 
 export default CertificateService;
-
-
-
-

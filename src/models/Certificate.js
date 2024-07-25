@@ -65,7 +65,7 @@ const certificateSchema = new mongoose.Schema({
 });
 
 const StudentCertificate = new mongoose.model(
-  "StudentSchema",
+  "StudentCertificate",
   certificateSchema
 );
 export default StudentCertificate;
