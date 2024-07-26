@@ -40,6 +40,7 @@ class CertificateService {
         payload = {
           studentName: student.name,
           stutentProfilePic: student.profilepic,
+          studentId:student._id,
           batchId: batchId,
           fatherName: student.fathername,
           DOB: student.dob,

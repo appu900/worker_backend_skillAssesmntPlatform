@@ -5,6 +5,10 @@ const certificateSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  studentId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Student",
+  },
   stutentProfilePic:{
     type:String
   },
